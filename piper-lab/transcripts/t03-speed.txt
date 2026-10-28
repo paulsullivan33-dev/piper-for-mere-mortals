@@ -1,0 +1,21 @@
+# A four-sentence paragraph (30 words), each voice three runs.
+
+$ for v in medium high; do for i in 1 2 3; do echo "$PARA" | ./piper/piper -m voices/en_US-lessac-$v.onnx -f out/para-$v.wav 2>&1 | grep "Real-time factor"; done; done
+medium run 1: [2026-10-28 18:42:32.296] [piper] [info] Real-time factor: 0.2395453004316516 (infer=2.4890983780000004 sec, audio=10.390929705215418 sec)
+medium run 2: [2026-10-28 18:42:35.893] [piper] [info] Real-time factor: 0.26523630364091183 (infer=2.851512798 sec, audio=10.750839002267574 sec)
+medium run 3: [2026-10-28 18:42:38.950] [piper] [info] Real-time factor: 0.18780299518452917 (infer=1.966710441 sec, audio=10.47219954648526 sec)
+high run 1: [2026-10-28 18:42:51.200] [piper] [info] Real-time factor: 1.0801984869159837 (infer=11.475088144 sec, audio=10.62312925170068 sec)
+high run 2: [2026-10-28 18:43:02.673] [piper] [info] Real-time factor: 0.9563370295159054 (infer=10.514589511999999 sec, audio=10.994648526077098 sec)
+high run 3: [2026-10-28 18:43:23.047] [piper] [info] Real-time factor: 1.8301795116126156 (infer=19.824703673 sec, audio=10.832108843537414 sec)
+
+$ python3 piper-lab/check-wav.py out/para-medium.wav out/para-high.wav
+out/para-medium.wav
+  sample rate 22050 Hz, 1 channel(s), 16-bit
+  248552 samples, 11.27 seconds
+  RMS level -17.0 dBFS, peak -0.0 dBFS
+  zero samples: 10.0%
+out/para-high.wav
+  sample rate 22050 Hz, 1 channel(s), 16-bit
+  256488 samples, 11.63 seconds
+  RMS level -16.3 dBFS, peak -0.0 dBFS
+  zero samples: 9.5%

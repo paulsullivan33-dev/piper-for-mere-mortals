@@ -1,0 +1,30 @@
+# 1) A model file that does not exist:
+$ echo "$S" | ./piper/piper -m voices/no-such-voice.onnx -f out/x.wav
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  Model file doesn't exist
+(exit 134)
+
+# 2) The model with its .json sidecar missing (copied alone):
+$ echo "$S" | ./piper/piper -m out/lonely.onnx -f out/x.wav
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  Model config doesn't exist
+(exit 134)
+
+# 3) Empty input:
+$ printf "" | ./piper/piper -m voices/en_US-lessac-medium.onnx -f out/empty.wav; ls -la out/empty.wav
+(exit 0)
+ls: cannot access 'out/empty.wav': No such file or directory
+
+# 4) Asking a one-speaker voice for speaker 5:
+$ echo "$S" | ./piper/piper -m voices/en_US-lessac-medium.onnx --speaker 5 -f out/x.wav
+out/x.wav
+[2026-10-28 18:44:23.991] [piper] [info] Real-time factor: 0.11957994669497281 (infer=0.319313708 sec, audio=2.670294784580499 sec)
+[2026-10-28 18:44:23.991] [piper] [info] Terminated piper
+(exit 0)
+
+# 5) Speaker 904 on libritts_r, which has speakers 0-903:
+$ echo "$S" | ./piper/piper -m voices/en_US-libritts_r-medium.onnx --speaker 904 -f out/x.wav
+2026-10-28 18:44:24.548591765 [E:onnxruntime:, sequential_executor.cc:494 ExecuteKernel] Non-zero status code returned while running Gather node. Name:'/emb_g/Gather' Status Message: indices element out of data bounds, idx=904 must be within the inclusive range [-904,903]
+terminate called after throwing an instance of 'Ort::Exception'
+  what():  Non-zero status code returned while running Gather node. Name:'/emb_g/Gather' Status Message: indices element out of data bounds, idx=904 must be within the inclusive range [-904,903]
+(exit 134)

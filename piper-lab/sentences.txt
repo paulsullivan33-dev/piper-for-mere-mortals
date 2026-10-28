@@ -1,0 +1,4 @@
+The quick brown fox jumps over the lazy dog.
+Text to speech turns written words into spoken audio, entirely on this computer, with no network connection at all.
+Piper reads text out loud. It runs completely offline. The voice lives in a file on this machine, and the sound comes out as an ordinary WAV file. Nothing is sent anywhere.
+Tomorrow will be sunny, with a high of seventy-two degrees and a light wind from the west.

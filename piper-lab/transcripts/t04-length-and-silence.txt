@@ -1,0 +1,30 @@
+$ for L in 0.75 1.0 1.5; do echo "$S" | ./piper/piper -m voices/en_US-lessac-medium.onnx --length_scale $L -f out/len-$L.wav; done
+out/len-0.75.wav
+out/len-1.0.wav
+out/len-1.5.wav
+
+$ python3 piper-lab/check-wav.py out/len-0.75.wav out/len-1.0.wav out/len-1.5.wav
+out/len-0.75.wav
+  sample rate 22050 Hz, 1 channel(s), 16-bit
+  52538 samples, 2.38 seconds
+  RMS level -18.3 dBFS, peak -0.0 dBFS
+  zero samples: 10.5%
+out/len-1.0.wav
+  sample rate 22050 Hz, 1 channel(s), 16-bit
+  65082 samples, 2.95 seconds
+  RMS level -17.7 dBFS, peak -0.0 dBFS
+  zero samples: 9.8%
+out/len-1.5.wav
+  sample rate 22050 Hz, 1 channel(s), 16-bit
+  79930 samples, 3.62 seconds
+  RMS level -17.5 dBFS, peak -0.0 dBFS
+  zero samples: 8.8%
+
+# sentence_silence: the gap Piper leaves after each sentence.
+$ echo "$S" | ./piper/piper -m voices/en_US-lessac-medium.onnx --sentence_silence 1.5 -f out/gap.wav
+out/gap.wav
+out/gap.wav
+  sample rate 22050 Hz, 1 channel(s), 16-bit
+  92211 samples, 4.18 seconds
+  RMS level -19.3 dBFS, peak -0.0 dBFS
+  zero samples: 38.2%

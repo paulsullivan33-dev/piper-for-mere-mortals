@@ -1,0 +1,38 @@
+# 1) Four lines in, no --output_file: one WAV per line, auto-named,
+#    written to --output_dir
+$ ./piper/piper -m voices/en_US-lessac-medium.onnx --output_dir out/lines < piper-lab/sentences.txt
+/home/hatch/workspace/build-check/piper-scratch/out/lines/1793213043970925994.wav
+/home/hatch/workspace/build-check/piper-scratch/out/lines/1793213044611410707.wav
+/home/hatch/workspace/build-check/piper-scratch/out/lines/1793213045583346373.wav
+/home/hatch/workspace/build-check/piper-scratch/out/lines/1793213047520028000.wav
+
+$ ls out/lines/
+1793213043970925994.wav
+1793213044611410707.wav
+1793213045583346373.wav
+1793213047520028000.wav
+
+# 2) The same four lines with --output_file: one combined WAV
+$ ./piper/piper -m voices/en_US-lessac-medium.onnx -f out/combined.wav < piper-lab/sentences.txt
+out/combined.wav
+out/combined.wav
+  sample rate 22050 Hz, 1 channel(s), 16-bit
+  570518 samples, 25.87 seconds
+  RMS level -17.1 dBFS, peak -0.0 dBFS
+  zero samples: 8.4%
+
+# 3) JSON input mode: each line names its own output file
+$ echo '{"text": "A short line spoken by name.", "output_file": "out/by-name.wav"}' | ./piper/piper -m voices/en_US-lessac-medium.onnx --json-input
+out/by-name.wav
+-rw-rw---- 1 root root 90272 Oct 28 18:44 out/by-name.wav
+
+# 4) --output_raw: headerless samples to stdout, for piping
+$ echo "Raw output has no header at all." | ./piper/piper -m voices/en_US-lessac-medium.onnx --output_raw > out/raw.bin; file out/raw.bin
+out/raw.bin: data
+-rw-rw---- 1 root root 102516 Oct 28 18:44 out/raw.bin
+$ sox -t raw -r 22050 -e signed -b 16 -c 1 out/raw.bin out/raw-as-wav.wav   (telling sox the format Piper used)
+out/raw-as-wav.wav
+  sample rate 22050 Hz, 1 channel(s), 16-bit
+  51258 samples, 2.32 seconds
+  RMS level -17.3 dBFS, peak -0.0 dBFS
+  zero samples: 12.6%

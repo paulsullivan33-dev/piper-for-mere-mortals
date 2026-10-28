@@ -1,0 +1,44 @@
+$ ./piper/piper --version
+1.2.0
+
+$ ls -la voices/
+total 249728
+drwxrwx--- 1 root root       326 Oct 28 18:41 .
+drwxrwx--- 1 root root        46 Oct 28 18:41 ..
+-rw-rw---- 1 root root 113895201 Oct 28 18:41 en_US-lessac-high.onnx
+-rw-rw---- 1 root root      4883 Oct 28 18:41 en_US-lessac-high.onnx.json
+-rw-rw---- 1 root root  63201294 Oct 28 18:41 en_US-lessac-medium.onnx
+-rw-rw---- 1 root root      4885 Oct 28 18:41 en_US-lessac-medium.onnx.json
+-rw-rw---- 1 root root  78580914 Oct 28 18:41 en_US-libritts_r-medium.onnx
+-rw-rw---- 1 root root     20123 Oct 28 18:41 en_US-libritts_r-medium.onnx.json
+
+$ head -20 voices/en_US-lessac-medium.onnx.json   (the rest is the phoneme map)
+{
+  "audio": {
+    "sample_rate": 22050,
+    "quality": "medium"
+  },
+  "espeak": {
+    "voice": "en-us"
+  },
+  "inference": {
+    "noise_scale": 0.667,
+    "length_scale": 1,
+    "noise_w": 0.8
+  },
+  "phoneme_type": "espeak",
+  "phoneme_map": {},
+  "phoneme_id_map": {
+    "_": [
+      0
+    ],
+    "^": [
+  ...
+$ python3 -c "count the phoneme symbols in the map"
+phoneme_id_map symbols: 154
+top-level keys: audio, espeak, inference, phoneme_type, phoneme_map, phoneme_id_map, num_symbols, num_speakers, speaker_id_map, piper_version, language, dataset
+
+# A low-tier voice we did not download in full -- just its
+# small config file, to compare tiers:
+$ curl -s <piper-voices>/en/en_US/amy/low/en_US-amy-low.onnx.json | python3 -c "..."
+amy-low sample_rate: 16000 | quality: low | num_speakers: 1

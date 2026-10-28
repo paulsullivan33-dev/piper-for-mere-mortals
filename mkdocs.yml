@@ -1,0 +1,27 @@
+site_name: Piper for Mere Mortals
+site_description: A text to speech system that runs entirely on your own machine. Turning written text into spoken WAV files with downloadable neural voices, shaping how they sound with a handful of options, and proving the audio is real without sending a word to the cloud, with the limits stated plainly.
+site_url: https://paulsullivan33-dev.github.io/piper-for-mere-mortals/
+copyright: 'Part of <a href="https://paulsullivan33-dev.github.io/mere-mortals/">For Mere Mortals</a> · Text <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code MIT'
+
+# Guides live at the repo root (nice for GitHub browsing).
+# The deploy workflow copies them into docs/ before building.
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - What Piper Is: what-piper-is.md
+  - The Moving Parts: the-moving-parts.md
+  - Installing Piper: installing-piper.md
+  - Voices — Finding and Choosing One: voices.md
+  - Your First Synthesis: your-first-synthesis.md
+  - Proving the Audio: proving-the-audio.md
+  - Speed — Faster Than Real Time: speed.md
+  - Shaping the Voice: shaping-the-voice.md
+  - Paragraphs, Lines and JSON Input: paragraphs-lines-and-json.md
+  - Recipes: recipes.md
+  - The Neighbours: the-neighbours.md
+  - Limits: limits.md
+  - Troubleshooting: troubleshooting.md
+  - Glossary: glossary.md
+  - Writing Criteria: criteria.md

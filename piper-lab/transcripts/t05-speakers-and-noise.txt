@@ -1,0 +1,56 @@
+# libritts_r has 904 speakers (numbered 0-903). Three of them:
+$ for SP in 0 5 100; do echo "$S" | ./piper/piper -m voices/en_US-libritts_r-medium.onnx --speaker $SP -f out/spk-$SP.wav; done
+out/spk-0.wav
+out/spk-5.wav
+out/spk-100.wav
+
+$ python3 piper-lab/check-wav.py out/spk-0.wav out/spk-5.wav out/spk-100.wav
+out/spk-0.wav
+  sample rate 22050 Hz, 1 channel(s), 16-bit
+  52026 samples, 2.36 seconds
+  RMS level -16.2 dBFS, peak -0.0 dBFS
+  zero samples: 8.5%
+out/spk-5.wav
+  sample rate 22050 Hz, 1 channel(s), 16-bit
+  51002 samples, 2.31 seconds
+  RMS level -17.1 dBFS, peak -0.0 dBFS
+  zero samples: 8.7%
+out/spk-100.wav
+  sample rate 22050 Hz, 1 channel(s), 16-bit
+  48186 samples, 2.19 seconds
+  RMS level -14.8 dBFS, peak -0.0 dBFS
+  zero samples: 9.2%
+
+# Same text, same voice, two runs in a row -- identical?
+$ echo "$S" | piper ... -f out/run-a.wav; echo "$S" | piper ... -f out/run-b.wav; md5sum out/run-a.wav out/run-b.wav
+out/run-a.wav
+out/run-b.wav
+5248a49bfeac0e0978d569ac13bcc56a  out/run-a.wav
+955521dba1699be1ab70212808a15233  out/run-b.wav
+out/run-a.wav
+  sample rate 22050 Hz, 1 channel(s), 16-bit
+  63034 samples, 2.86 seconds
+  RMS level -16.8 dBFS, peak -0.0 dBFS
+  zero samples: 9.4%
+out/run-b.wav
+  sample rate 22050 Hz, 1 channel(s), 16-bit
+  61498 samples, 2.79 seconds
+  RMS level -18.3 dBFS, peak -0.0 dBFS
+  zero samples: 10.7%
+
+# With --noise_scale 0 the randomness is turned down:
+$ echo "$S" | piper ... --noise_scale 0 -f out/calm-a.wav (twice)
+out/calm-a.wav
+out/calm-b.wav
+61bae471bf797561ef285798490f5f46  out/calm-a.wav
+953436257e96e275cbff155f2de8bdc8  out/calm-b.wav
+out/calm-a.wav
+  sample rate 22050 Hz, 1 channel(s), 16-bit
+  63802 samples, 2.89 seconds
+  RMS level -17.5 dBFS, peak -0.0 dBFS
+  zero samples: 9.8%
+out/calm-b.wav
+  sample rate 22050 Hz, 1 channel(s), 16-bit
+  63546 samples, 2.88 seconds
+  RMS level -17.3 dBFS, peak -0.0 dBFS
+  zero samples: 9.5%

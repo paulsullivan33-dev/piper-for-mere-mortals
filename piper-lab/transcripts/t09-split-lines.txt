@@ -1,0 +1,18 @@
+# One sentence split across two input lines:
+$ printf "The quick brown\nfox jumps over the lazy dog.\n" | ./piper/piper -m voices/en_US-lessac-medium.onnx -f out/split.wav --debug
+[2026-10-28 18:47:29.223] [piper] [debug] Phonemizing text: The quick brown fox jumps over the lazy dog.
+[2026-10-28 18:47:29.555] [piper] [info] Real-time factor: 0.10944316869948816 (infer=0.294786788 sec, audio=2.693514739229025 sec)
+out/split.wav
+  sample rate 22050 Hz, 1 channel(s), 16-bit
+  63802 samples, 2.89 seconds
+  RMS level -18.1 dBFS, peak -0.0 dBFS
+  zero samples: 11.1%
+
+# The same sentence on one line measured 2.61 s of speech (t01).
+# The same split sentence, file-per-line mode:
+$ printf "The quick brown\nfox jumps over the lazy dog.\n" | ./piper/piper -m voices/en_US-lessac-medium.onnx --output_dir out/splitdir
+/home/hatch/workspace/build-check/piper-scratch/out/splitdir/1793213255546168170.wav
+/home/hatch/workspace/build-check/piper-scratch/out/splitdir/1793213255664479927.wav
+
+$ ls out/splitdir | wc -l   (files written)
+2

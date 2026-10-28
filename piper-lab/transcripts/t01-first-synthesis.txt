@@ -1,0 +1,32 @@
+$ echo "The quick brown fox jumps over the lazy dog." | ./piper/piper --model voices/en_US-lessac-medium.onnx --output_file out/hello.wav
+[2026-10-28 18:42:15.757] [piper] [info] Loaded voice in 0.726619824 second(s)
+[2026-10-28 18:42:15.788] [piper] [info] Initialized piper
+out/hello.wav
+[2026-10-28 18:42:16.496] [piper] [info] Real-time factor: 0.24247512264062504 (infer=0.633404402 sec, audio=2.6122448979591835 sec)
+[2026-10-28 18:42:16.496] [piper] [info] Terminated piper
+(exit 0)
+
+$ ls -la out/
+total 124
+drwxrwx--- 1 root root     18 Oct 28 18:42 .
+drwxrwx--- 1 root root     52 Oct 28 18:42 ..
+-rw-rw---- 1 root root 124064 Oct 28 18:42 hello.wav
+
+$ file out/hello.wav
+out/hello.wav: RIFF (little-endian) data, WAVE audio, Microsoft PCM, 16 bit, mono 22050 Hz
+
+$ ffprobe out/hello.wav
+  Duration: 00:00:02.81, bitrate: 352 kb/s
+  Stream #0:0: Audio: pcm_s16le ([1][0][0][0] / 0x0001), 22050 Hz, 1 channels, s16, 352 kb/s
+
+$ soxi out/hello.wav
+
+Input File     : 'out/hello.wav'
+Channels       : 1
+Sample Rate    : 22050
+Precision      : 16-bit
+Duration       : 00:00:02.81 = 62010 samples ~ 210.918 CDDA sectors
+File Size      : 124k
+Bit Rate       : 353k
+Sample Encoding: 16-bit Signed Integer PCM
+

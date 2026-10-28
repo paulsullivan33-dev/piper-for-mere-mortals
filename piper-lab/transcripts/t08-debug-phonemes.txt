@@ -1,0 +1,20 @@
+# --debug shows the phonemes espeak-ng produced for the text:
+$ echo "Piper reads text out loud." | ./piper/piper -m voices/en_US-lessac-medium.onnx -f out/debug.wav --debug
+[2026-10-28 18:44:32.332] [piper] [debug] Voice uses eSpeak phonemes (en-us)
+[2026-10-28 18:44:32.333] [piper] [debug] Phonemizing text: Piper reads text out loud.
+[2026-10-28 18:44:32.339] [piper] [debug] Converting 32 phoneme(s) to ids: pˈaɪpɚ ɹˈiːdz tˈɛkst ˈaʊt lˈaʊd.
+[2026-10-28 18:44:32.339] [piper] [debug] Converted 32 phoneme(s) to 67 phoneme id(s): 1, 0, 28, 0, 120, 0, 14, 0, 74, 0, 28, 0, 60, 0, 3, 0, 88, 0, 120, 0, 21, 0, 122, 0, 17, 0, 38, 0, 3, 0, 32, 0, 120, 0, 61, 0, 23, 0, 31, 0, 32, 0, 3, 0, 120, 0, 14, 0, 100, 0, 32, 0, 3, 0, 24, 0, 120, 0, 14, 0, 100, 0, 17, 0, 10, 0, 2, 
+[2026-10-28 18:44:32.339] [piper] [debug] Synthesizing audio for 67 phoneme id(s)
+
+# Numbers and abbreviations are expanded by espeak-ng before
+# the model ever sees them -- visible in the phoneme stream:
+$ echo "Dr. Lee paid 5 dollars in 2024." | ./piper/piper ... --debug
+[2026-10-28 18:44:33.365] [piper] [debug] Voice uses eSpeak phonemes (en-us)
+[2026-10-28 18:44:33.378] [piper] [debug] Converting 8 phoneme(s) to ids: dˈɑːktɚ.
+[2026-10-28 18:44:33.378] [piper] [debug] Converted 8 phoneme(s) to 19 phoneme id(s): 1, 0, 17, 0, 120, 0, 51, 0, 122, 0, 23, 0, 32, 0, 60, 0, 10, 0, 2, 
+[2026-10-28 18:44:33.378] [piper] [debug] Synthesizing audio for 19 phoneme id(s)
+out/numbers.wav
+  sample rate 22050 Hz, 1 channel(s), 16-bit
+  84596 samples, 3.84 seconds
+  RMS level -16.5 dBFS, peak -0.0 dBFS
+  zero samples: 14.4%

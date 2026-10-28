@@ -1,0 +1,12 @@
+$ python3 piper-lab/check-wav.py out/hello.wav
+out/hello.wav
+  sample rate 22050 Hz, 1 channel(s), 16-bit
+  62010 samples, 2.81 seconds
+  RMS level -17.5 dBFS, peak -0.0 dBFS
+  zero samples: 9.8%
+
+# The sentence has 9 words. Piper reported 2.61 s of audio
+# (the file is 2.81 s: the extra 0.2 s is the default
+# --sentence_silence pause added after the sentence).
+# 9 words / 2.61 s = 3.4 words per second, about 207 words
+# per minute -- a normal speaking rate.
